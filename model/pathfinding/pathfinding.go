@@ -60,6 +60,37 @@ func All(start Node) map[Node]Path {
 	return path
 }
 
+func AllWithin(start Node, N int) map[Node]Path {
+	frontier := NewNodeQueue()
+	parent := make(map[Node]Node)
+	visited := make(map[Node]bool)
+
+	frontier.Put(start, nil, 0, 0)
+
+	for !frontier.Empty() {
+		current, prev, old_cost := frontier.Get()
+		if visited[current] {
+			continue
+		}
+		visited[current] = true
+		parent[current] = prev
+
+		for _, next := range current.Neighbours() {
+			new_cost := old_cost + current.Cost(next)
+			if new_cost <= N && !visited[next] {
+				frontier.Put(next, current, new_cost, new_cost)
+			}
+		}
+	}
+
+	path := make(map[Node]Path)
+	for end := range visited {
+		path[end] = backtrack(end, parent)
+	}
+
+	return path
+}
+
 func Single(start, end Node) (Path, bool) {
 	frontier := NewNodeQueue()
 	parent := make(map[Node]Node)

@@ -100,6 +100,85 @@ func TestAll(t *testing.T) {
 	}
 }
 
+func TestAllWithin(t *testing.T) {
+	m := AllWithin(testNode(0),6)
+
+	paths := map[int][]testNode{
+		0: []testNode{0},
+		1: []testNode{0,1},
+		2: []testNode{0,1,2},
+		3: []testNode{0,1,2,3},
+		6: []testNode{0,7,6},
+		7: []testNode{0,7},
+	}
+
+	for i, path := range paths {
+		found, ok := m[testNode(i)]
+		if !ok {
+			t.Errorf("No path found from 0 to %d", i)
+			continue
+		}
+		if len(found) != len(path) {
+			t.Errorf("Incorrect path from 0 to %d", i)
+			t.Errorf("%v", found)
+			continue
+		}
+		for j, node := range path {
+			if node != found[j] {
+				t.Errorf("Incorrect path from 0 to %d", i)
+				t.Errorf("%v", found)
+				break
+			}
+		}
+	}
+
+	for end := range m {
+		_, ok := paths[int(end.(testNode))]
+		if !ok {
+			t.Errorf("Path to disconnected/out of range node %d", end)
+		}
+	}
+
+	m = AllWithin(testNode(3),6)
+
+	paths = map[int][]testNode{
+		0: []testNode{3,2,1,0},
+		1: []testNode{3,2,1},
+		2: []testNode{3,2},
+		3: []testNode{3},
+		4: []testNode{3,4},
+		5: []testNode{3,4,5},
+		6: []testNode{3,4,5,6},
+	}
+
+	for i, path := range paths {
+		found, ok := m[testNode(i)]
+		if !ok {
+			t.Errorf("No path found from 3 to %d", i)
+			continue
+		}
+		if len(found) != len(path) {
+			t.Errorf("Incorrect path from 3 to %d", i)
+			t.Errorf("%v", found)
+			continue
+		}
+		for j, node := range path {
+			if node != found[j] {
+				t.Errorf("Incorrect path from 3 to %d", i)
+				t.Errorf("%v", found)
+				break
+			}
+		}
+	}
+
+	for end := range m {
+		_, ok := paths[int(end.(testNode))]
+		if !ok {
+			t.Errorf("Path found to disconnected/out of range node %d", end)
+		}
+	}
+}
+
 func TestSingle(t *testing.T) {
 	paths := [][]testNode{
 		[]testNode{0},
