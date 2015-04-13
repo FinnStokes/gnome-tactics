@@ -5,11 +5,11 @@ import "testing"
 type testNode int
 
 func (t testNode) Neighbours() []Node {
-	return []Node{(t-1) & 7, (t+1) & 7}
+	return []Node{(t - 1) & 7, (t + 1) & 7}
 }
 
 func (t testNode) Cost(node Node) int {
-	if (t == 0 && node.(testNode) == 7) ||  (t == 7 && node.(testNode) == 0) {
+	if (t == 0 && node.(testNode) == 7) || (t == 7 && node.(testNode) == 0) {
 		return 3
 	} else {
 		return 2
@@ -25,13 +25,13 @@ func TestAll(t *testing.T) {
 
 	paths := [][]testNode{
 		[]testNode{0},
-		[]testNode{0,1},
-		[]testNode{0,1,2},
-		[]testNode{0,1,2,3},
-		[]testNode{0,1,2,3,4},
-		[]testNode{0,7,6,5},
-		[]testNode{0,7,6},
-		[]testNode{0,7},
+		[]testNode{0, 1},
+		[]testNode{0, 1, 2},
+		[]testNode{0, 1, 2, 3},
+		[]testNode{0, 1, 2, 3, 4},
+		[]testNode{0, 7, 6, 5},
+		[]testNode{0, 7, 6},
+		[]testNode{0, 7},
 	}
 
 	for i, path := range paths {
@@ -63,14 +63,14 @@ func TestAll(t *testing.T) {
 	m = All(testNode(3))
 
 	paths = [][]testNode{
-		[]testNode{3,2,1,0},
-		[]testNode{3,2,1},
-		[]testNode{3,2},
+		[]testNode{3, 2, 1, 0},
+		[]testNode{3, 2, 1},
+		[]testNode{3, 2},
 		[]testNode{3},
-		[]testNode{3,4},
-		[]testNode{3,4,5},
-		[]testNode{3,4,5,6},
-		[]testNode{3,4,5,6,7},
+		[]testNode{3, 4},
+		[]testNode{3, 4, 5},
+		[]testNode{3, 4, 5, 6},
+		[]testNode{3, 4, 5, 6, 7},
 	}
 
 	for i, path := range paths {
@@ -101,15 +101,15 @@ func TestAll(t *testing.T) {
 }
 
 func TestAllWithin(t *testing.T) {
-	m := AllWithin(testNode(0),6)
+	m := AllWithin(testNode(0), 6)
 
 	paths := map[int][]testNode{
 		0: []testNode{0},
-		1: []testNode{0,1},
-		2: []testNode{0,1,2},
-		3: []testNode{0,1,2,3},
-		6: []testNode{0,7,6},
-		7: []testNode{0,7},
+		1: []testNode{0, 1},
+		2: []testNode{0, 1, 2},
+		3: []testNode{0, 1, 2, 3},
+		6: []testNode{0, 7, 6},
+		7: []testNode{0, 7},
 	}
 
 	for i, path := range paths {
@@ -139,16 +139,16 @@ func TestAllWithin(t *testing.T) {
 		}
 	}
 
-	m = AllWithin(testNode(3),6)
+	m = AllWithin(testNode(3), 6)
 
 	paths = map[int][]testNode{
-		0: []testNode{3,2,1,0},
-		1: []testNode{3,2,1},
-		2: []testNode{3,2},
+		0: []testNode{3, 2, 1, 0},
+		1: []testNode{3, 2, 1},
+		2: []testNode{3, 2},
 		3: []testNode{3},
-		4: []testNode{3,4},
-		5: []testNode{3,4,5},
-		6: []testNode{3,4,5,6},
+		4: []testNode{3, 4},
+		5: []testNode{3, 4, 5},
+		6: []testNode{3, 4, 5, 6},
 	}
 
 	for i, path := range paths {
@@ -182,13 +182,13 @@ func TestAllWithin(t *testing.T) {
 func TestSingle(t *testing.T) {
 	paths := [][]testNode{
 		[]testNode{0},
-		[]testNode{0,1},
-		[]testNode{0,1,2},
-		[]testNode{0,1,2,3},
-		[]testNode{0,1,2,3,4},
-		[]testNode{0,7,6,5},
-		[]testNode{0,7,6},
-		[]testNode{0,7},
+		[]testNode{0, 1},
+		[]testNode{0, 1, 2},
+		[]testNode{0, 1, 2, 3},
+		[]testNode{0, 1, 2, 3, 4},
+		[]testNode{0, 7, 6, 5},
+		[]testNode{0, 7, 6},
+		[]testNode{0, 7},
 	}
 
 	for i, path := range paths {
@@ -213,18 +213,18 @@ func TestSingle(t *testing.T) {
 
 	found, ok := Single(testNode(3), testNode(8))
 	if ok || found != nil {
-			t.Errorf("Path found to disconnected node %d", 8)
+		t.Errorf("Path found to disconnected node %d", 8)
 	}
-	
+
 	paths = [][]testNode{
-		[]testNode{3,2,1,0},
-		[]testNode{3,2,1},
-		[]testNode{3,2},
+		[]testNode{3, 2, 1, 0},
+		[]testNode{3, 2, 1},
+		[]testNode{3, 2},
 		[]testNode{3},
-		[]testNode{3,4},
-		[]testNode{3,4,5},
-		[]testNode{3,4,5,6},
-		[]testNode{3,4,5,6,7},
+		[]testNode{3, 4},
+		[]testNode{3, 4, 5},
+		[]testNode{3, 4, 5, 6},
+		[]testNode{3, 4, 5, 6, 7},
 	}
 
 	for i, path := range paths {
@@ -249,6 +249,6 @@ func TestSingle(t *testing.T) {
 
 	found, ok = Single(testNode(3), testNode(8))
 	if ok || found != nil {
-			t.Errorf("Path found to disconnected node %d", 8)
+		t.Errorf("Path found to disconnected node %d", 8)
 	}
 }

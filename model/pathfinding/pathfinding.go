@@ -7,7 +7,7 @@ type Node interface {
 }
 
 type PrioritisedNode struct {
-	node Node
+	node     Node
 	priority int
 }
 
@@ -109,11 +109,11 @@ func Single(start, end Node) (Path, bool) {
 		if current == end {
 			return backtrack(end, parent), true
 		}
-		
+
 		for _, next := range current.Neighbours() {
 			new_cost := old_cost + current.Cost(next)
 			if !visited[next] {
-				frontier.Put(next, current, new_cost, new_cost + next.Heuristic(end))
+				frontier.Put(next, current, new_cost, new_cost+next.Heuristic(end))
 			}
 		}
 	}

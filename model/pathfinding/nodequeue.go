@@ -4,9 +4,9 @@ import "container/heap"
 
 type nodeQueueElement struct {
 	Priority int
-	Cost int
-	Parent Node
-	Self Node
+	Cost     int
+	Parent   Node
+	Self     Node
 }
 
 type NodeQueue []nodeQueueElement
@@ -38,7 +38,7 @@ func (q *NodeQueue) Push(n interface{}) {
 func (q *NodeQueue) Pop() interface{} {
 	n := len(*q)
 	last := (*q)[n-1]
-	*q = (*q)[0:n-1]
+	*q = (*q)[0 : n-1]
 	return last
 }
 
