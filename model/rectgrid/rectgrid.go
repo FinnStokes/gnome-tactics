@@ -1,5 +1,7 @@
 package rectgrid
 
+import "math"
+
 import "github.com/FinnStokes/gnome-tactics/model/pathfinding"
 
 type Grid interface {
@@ -13,6 +15,18 @@ type Rect struct {
 }
 
 type RectSet map[Rect]bool
+
+func abs(v int) int {
+	if v < 0 {
+		return -v
+	} else {
+		return v
+	}
+}
+
+func round(v float64) int {
+	return int(math.Floor(v + .5))
+}
 
 var adjacent = [...]struct{ X, Y int }{
 	{1, 0},
@@ -34,14 +48,6 @@ func (self Rect) Neighbours() []pathfinding.Node {
 
 func (self Rect) Cost(node pathfinding.Node) int {
 	return self.Grid.Cost(self, node.(Rect))
-}
-
-func abs(v int) int {
-	if v < 0 {
-		return -v
-	} else {
-		return v
-	}
 }
 
 func (self Rect) Distance(other Rect) int {
@@ -70,7 +76,7 @@ func (self Rect) Line(end Rect) (line []Rect) {
 	for i, t := 1, step; i <= N; i, t = i+1, t+step {
 		x := float64(self.X) + float64(end.X-self.X)*t
 		y := float64(self.Y) + float64(end.Y-self.Y)*t
-		line[i] = Rect{int(x + .5), int(y + .5), self.Grid}
+		line[i] = Rect{round(x), round(y), self.Grid}
 	}
 
 	return
