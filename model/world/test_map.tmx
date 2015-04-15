@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="hexagonal" renderorder="right-down" width="20" height="20" tilewidth="40" tileheight="46" hexsidelength="23" staggeraxis="y" staggerindex="odd" nextobjectid="1">
+ <tileset firstgid="1" name="Test" tilewidth="40" tileheight="46">
+  <image source="test_tileset.png" width="80" height="92"/>
+  <tile id="0">
+   <properties>
+    <property name="Passable" value="Land"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="Passable" value="Naval"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="Passable" value="Land"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="Passable" value="Flying"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tile Layer 1" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzN1EEOABEMBdAOvf+ZbUga8av9RGbRBeKlShURKY/i64Hm0brn1cXeMV/NetSa9zGWZ47QpBexMmdFnia9XV5MbsjLnnVnMffq1e7ERDVj3p019YIZye+kN5B3qz9sL2druPpjGGs27Zhx/hIN1TYDcQ==
+  </data>
+ </layer>
+</map>
